@@ -1,55 +1,44 @@
 package util
 
 import (
-    "encoding/csv"
-    "fmt"
     "os"
-	"io"
-	"golang.org/x/text/encoding/charmap"
-	"bufio"
+    "io"
+    "IngSoftStaff/pkg/staff"
+    "encoding/csv"
 )
 
-type PersonDTO struct {
-    ID       string `json:"id" csv:"id"`
-    Name     string `json:"name" csv:"name"`
-    Age      int    `json:"age" csv:"age"`
-    Location string `json:"location" csv:"location"`
-}
+func ReadData(filename string) ([]staff.PersonDTO, error) {
 
-func ReadData(filename string) (error) {
-    // Open the CSV file
+    var persons []staff.PersonDTO
+
+    records := readCSV(filename)
+
+    return persons, nil
+}
+func readCSV(filename string) ([][]string, error) {
+
+    records := [][]string{};
+
     file, err := os.Open(filename)
     if err != nil {
-        fmt.Println("Error:", err)
-        return err
+        return [][]string{}, err
     }
     defer file.Close()
+        
+    reader := csv.NewReader(file)
+        
+    // read csv values using csv.Reader
+    for {
+        record, err := reader.Read()
+        if err == io.EOF {
+            break
+        }
+        if err != nil {
+            return []staff.PersonDTO{}, err
+        }
+        // do something with read line
+        records = append(records, record)
 
-    // Create a new reader that converts ISO-8859-1 to UTF-8
-    reader := csv.NewReader(bufio.NewReader(charmap.ISO8859_1.NewDecoder().Reader(file)))
-
-    // Read in the header row
-    headers, err := reader.Read()
-    if err != nil {
-        fmt.Println("Error:", err)
-        return err
+        return records, nil
     }
-
-    // Print out the headers
-    fmt.Println(headers)
-
- // Read in the records
-	for {
-		record, err := reader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			fmt.Println("Error:", err)
-			return err
-		}
-		fmt.Println(record)
-	}
-
-	return nil
 }
