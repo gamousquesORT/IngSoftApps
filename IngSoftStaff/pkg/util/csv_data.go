@@ -1,44 +1,47 @@
 package util
 
 import (
-    "os"
-    "io"
-    "IngSoftStaff/pkg/staff"
-    "encoding/csv"
+	"IngSoftStaff/pkg/staff"
+	"encoding/csv"
+	"os"
 )
 
-func ReadData(filename string) ([]staff.PersonDTO, error) {
+// try using https://github.com/gocarina/gocsv
 
-    var persons []staff.PersonDTO
-
-    records := readCSV(filename)
-
-    return persons, nil
+type ReadOptions struct {
+	f func(data [][]string) (staffList []staff.Person)
+	filename string
+	delimiter rune
 }
-func readCSV(filename string) ([][]string, error) {
 
-    records := [][]string{};
-
-    file, err := os.Open(filename)
+func ReadData(opt ReadOptions) ([]staff.Person, error) {
+	file, err := os.Open(opt.filename)
     if err != nil {
-        return [][]string{}, err
+        return nil, err
     }
-    defer file.Close()
-        
-    reader := csv.NewReader(file)
-        
-    // read csv values using csv.Reader
-    for {
-        record, err := reader.Read()
-        if err == io.EOF {
-            break
-        }
-        if err != nil {
-            return []staff.PersonDTO{}, err
-        }
-        // do something with read line
-        records = append(records, record)
 
-        return records, nil
+    // remember to close the file at the end of the program
+    defer file.Close()
+
+    // read csv values using csv.Reader
+    csvReader := csv.NewReader(file)
+	csvReader.Comma = opt.delimiter
+    data, err := csvReader.ReadAll()
+    if err != nil {
+        return nil, err
     }
+
+    // convert records to array of structs
+    staffList := opt.f(data)
+	return staffList, nil
 }
+
+func CreateStaffList(data [][]string) (staffList []staff.Person) {
+	staffList = []staff.Person{}
+	for _, record := range data {
+		println(record)
+	}
+	return staffList
+}
+
+

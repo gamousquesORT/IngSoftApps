@@ -2,43 +2,55 @@ package staff
 
 import "time"
 
-/*
-type PersonDTO struct {
-    ID       string `json:"id" csv:"id"`
-    Name     string `json:"name" csv:"name"`
-    Age      int    `json:"age" csv:"age"`
-    Location string `json:"location" csv:"location"`
-}
-*/
-
-
 
 const (
-    Student = 1
-    Bachelor = 2
-    Graduate = 3
+	Student  = 1
+	Bachelor = 2
+	Graduate = 3
 )
 
+const (
+	Active     = 1
+	Resigned   = 2
+	Onboarding = 3
+)
 
-type PersonDTO struct {
-	IDPersona string
-	FirstName string
-	Surname   string
-	WorkEmail string
-    PersonalEmail string
-    CellPhone string
-    Graduation string
-    Degree string
+type Person struct {
+	Id            string
+	FirstName     string
+	Surname       string
+	WorkEmail     string
+	PersonalEmail string
+	CellPhone     string
+	Graduation    string
+	Degree        string
+	ActiveSince   time.Time
+	Status        int
 }
 
-type CourseDTO struct {
-    IDCourse string
-    Name     string
+type Course struct {
+	Id string
+	Name     string
 }
 
-type SessionDTO struct {
-    IDSession string
-    Name      string
-    StartDate time.Time
-    Instructors []PersonDTO
+type Session struct {
+	Id   string
+	Name        string
+	StartDate   time.Time
+	Instructors []Person
+}
+
+func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, graduation, degree string, activeSince time.Time, status int) Person {
+	return Person{
+		Id:            id,
+		FirstName:     firstName,
+		Surname:       surname,
+		WorkEmail:     workEmail,
+		PersonalEmail: personalEmail,
+		CellPhone:     cellPhone,
+		Graduation:    graduation,
+		Degree:        degree,
+		ActiveSince:   activeSince,
+		Status:        status,
+	}
 }
