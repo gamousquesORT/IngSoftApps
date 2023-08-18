@@ -8,20 +8,22 @@ import (
 
 func TestReadData(t *testing.T) {
 
-	t.Run("given_a_file_returns_a_PersonList", func(t *testing.T) {
-		want := []staff.Person{}
+	t.Run("given_a_wellformedfile_returns_a_PersonList", func(t *testing.T) {
+		got := []staff.Person{}
+	
+
 		options := ReadOptions{
-			f:        CreateStaffList,
+			f:        AddToStaffList,
 			filename: "../db/profesIngSoft1.csv",
 			delimiter: ';',
 		}
-
-		got, err := ReadData(options)
-		if err == nil {
+		want := []staff.Person{}
+		newgot, err  := ReadData(options, got)
+		if err != nil {
 			t.Errorf("Got not nil %v", err)
 		}
 
-		if !reflect.DeepEqual(got, want) {
+		if !reflect.DeepEqual(newgot, want) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
