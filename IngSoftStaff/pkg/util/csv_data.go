@@ -7,6 +7,7 @@ import (
 )
 
 // try using https://github.com/gocarina/gocsv
+// check https://medium.com/@KeithAlpichi/gos-standard-library-by-example-encoding-csv-75f098169822
 
 type ReadOptions struct {
 	f func(data [][]string) (staffList []staff.Person)
