@@ -1,7 +1,8 @@
 package main
 
-import "github.com/gin-gonic/gin"
+//import "github.com/gin-gonic/gin"
 
+/*
 func main() {
     // Create a new router
     r := gin.Default()
@@ -16,3 +17,4 @@ func main() {
     // Run the server
     r.Run()
 }
+*/

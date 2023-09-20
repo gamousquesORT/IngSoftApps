@@ -3,8 +3,9 @@ package util
 import (
 	"IngSoftStaff/pkg/staff"
 	"encoding/csv"
-	"os"
+	"fmt"
 	"io"
+	"os"
 	"time"
 )
 
@@ -26,18 +27,18 @@ func ReadData(opt ReadOptions,staffList []staff.Person) ([]staff.Person, error) 
     // remember to close the file at the end of the program
     defer file.Close()
 
-
 	csvReader := csv.NewReader(file)
 	csvReader.Comma = opt.delimiter
 	csvReader.FieldsPerRecord = -1
 
 	// read csv header
-
-	_, err = csvReader.Read()
+	var header []string
+	header, err = csvReader.Read()
 	if err != nil {
         return nil, err
     }
-
+	fmt.Printf("Header: %v\n", header)
+	
 	var newStaffList []staff.Person
 
 	for {
@@ -54,6 +55,7 @@ func ReadData(opt ReadOptions,staffList []staff.Person) ([]staff.Person, error) 
 		}
 		staffList = newStaffList
 	  }
+
 
   
 	return newStaffList, nil
