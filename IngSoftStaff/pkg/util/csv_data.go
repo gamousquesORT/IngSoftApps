@@ -28,7 +28,7 @@ func ReadData(opt ReadOptions,staffList []staff.Person) ([]staff.Person, error) 
     defer file.Close()
 
 	csvReader := csv.NewReader(file)
-	csvReader.Comma = opt.delimiter
+	csvReader.Comma = ';'
 	csvReader.FieldsPerRecord = -1
 
 	// read csv header
