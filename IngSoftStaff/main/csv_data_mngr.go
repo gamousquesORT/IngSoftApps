@@ -2,7 +2,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"encoding/csv"
 	"github.com/gocarina/gocsv"
@@ -34,7 +33,7 @@ type Person struct {
 
 func main() {
 
-	 delimiter, err := ReadCSVHeader();
+	 delimiter, err := ReadCSVHeader("../../../data/profesIngSoft.csv");
 	 if err != nil {
 		panic(err)
 	}
@@ -46,28 +45,24 @@ func main() {
 		return r
 	})
 
-	clientsFile, err := os.Open("../../../data/profesIngSoft.csv")
-//	clientsFile, err := os.OpenFile("../pkg/db/profesIngSoftOk.csv", os.O_RDWR, os.ModePerm)
+	staffFile, err := os.Open("../../../data/profesIngSoft.csv")
+
 	if err != nil {
 		panic(err)
 	}
-	defer clientsFile.Close()
+	defer staffFile.Close()
 
 
-	clients := []*Person{}
+	staff := []*Person{}
 	
-	if err := gocsv.UnmarshalFile(clientsFile, &clients); err != nil { // Load clients from file
+	if err := gocsv.UnmarshalFile(staffFile, &staff); err != nil { // Load clients from file
 		panic(err)
 	}
-	for _, client := range clients {
-		fmt.Println("Hello", client.FirstName)
-	}
-
 
 }
 
-func ReadCSVHeader() (rune, error) {
-	file, err := os.Open("../../../data/profesIngSoft.csv")
+func ReadCSVHeader(fileName string) (rune, error) {
+	file, err := os.Open(fileName)
     if err != nil {
         return 0, err
     }
