@@ -1,7 +1,8 @@
 
-package main
+package util
 
 import (
+	"IngSoftStaff/pkg/staff"
 	"os"
 	"encoding/csv"
 	"github.com/gocarina/gocsv"
@@ -12,30 +13,21 @@ import (
 
 //https://articles.wesionary.team/easy-working-with-csv-in-golang-using-gocsv-package-9c8424728bbe
 
-//"Persona,Nombre,Apellido,En Funcionarios,Materias,Email ORT,Email personal,Celular,Graduado hasta 2023.1,Posgrado"
 type NotUsed struct {
 	Name string
 }
 
-type Person struct {
-	Id            string `csv:"Persona"`
-	FirstName     string `csv:"Nombre"`
-	Surname       string `csv:"Apellido"`
-	WorkEmail     string `csv:"Email_ORT"`
-	PersonalEmail string `csv:"Email_Personal"`
-	CellPhone     string `csv:"Celular"`
-	Graduation    string `csv:"Graduado"`
-	Degree        string `csv:"Graduado"`
 
+type ReadOptions struct {
+	filename string
+	delimiter rune
 }
 
+func ReadData(opt ReadOptions,staffList []staff.Person) ([]*staff.Person, error) {
 
-
-func main() {
-
-	 delimiter, err := ReadCSVHeader("../../../data/profesIngSoft.csv");
+	 delimiter, err := ReadCSVHeader(opt.filename);
 	 if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	// set the pipe as the delimiter for reading
@@ -45,19 +37,21 @@ func main() {
 		return r
 	})
 
-	staffFile, err := os.Open("../../../data/profesIngSoft.csv")
+	staffFile, err := os.Open(opt.filename)
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	defer staffFile.Close()
 
 
-	staff := []*Person{}
+	staff := []*staff.Person{}
 	
 	if err := gocsv.UnmarshalFile(staffFile, &staff); err != nil { // Load clients from file
-		panic(err)
+		return nil, err
 	}
+
+	return staff, nil
 
 }
 

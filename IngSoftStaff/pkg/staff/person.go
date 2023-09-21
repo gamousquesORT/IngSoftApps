@@ -16,16 +16,15 @@ const (
 )
 
 type Person struct {
-	Id            string
-	FirstName     string
-	Surname       string
-	WorkEmail     string
-	PersonalEmail string
-	CellPhone     string
-	Graduation    string
-	Degree        string
-	ActiveSince   time.Time
-	Status        int
+	Id            string `csv:"Persona"`
+	FirstName     string `csv:"Nombre"`
+	Surname       string `csv:"Apellido"`
+	WorkEmail     string `csv:"Email_ORT"`
+	PersonalEmail string `csv:"Email_Personal"`
+	CellPhone     string `csv:"Celular"`
+	Graduation    string `csv:"Graduado"`
+	Degree        string `csv:"Graduado"`
+
 }
 
 type Course struct {
@@ -50,7 +49,5 @@ func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, grad
 		CellPhone:     cellPhone,
 		Graduation:    graduation,
 		Degree:        degree,
-		ActiveSince:   activeSince,
-		Status:        status,
 	}
 }

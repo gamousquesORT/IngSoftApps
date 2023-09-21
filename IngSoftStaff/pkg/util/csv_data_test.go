@@ -13,7 +13,6 @@ func TestReadData(t *testing.T) {
 	
 
 		options := ReadOptions{
-			f:        AddToStaffList,
 			filename: "../db/profesIngSoftNonExistent.csv",
 			delimiter: ';',
 		}
@@ -33,8 +32,7 @@ func TestReadData(t *testing.T) {
 	
 
 		options := ReadOptions{
-			f:        AddToStaffList,
-			filename: "../db/profesIngSoftOk.csv",
+			filename: "../../../../data/profesIngSoft.csv",
 			delimiter: ';',
 		}
 		want := []staff.Person{}
@@ -44,7 +42,7 @@ func TestReadData(t *testing.T) {
 		}
 
 		if !reflect.DeepEqual(newgot, want) {
-			t.Errorf("got %v want %v", got, want)
+			t.Errorf("got %v want %v", newgot, want)
 		}
 	})
 }
