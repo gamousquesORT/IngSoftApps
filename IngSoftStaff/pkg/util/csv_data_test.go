@@ -13,7 +13,7 @@ func TestReadData(t *testing.T) {
 	
 
 		options := ReadOptions{
-			filename: "../db/profesIngSoftNonExistent.csv",
+			filename: "../../profesIngSoft1.csv",
 			delimiter: ';',
 		}
 		want := []staff.Person{}
@@ -32,7 +32,7 @@ func TestReadData(t *testing.T) {
 	
 
 		options := ReadOptions{
-			filename: "../../../../data/profesIngSoft.csv",
+			filename: "../../profesIngSoft.csv",
 			delimiter: ';',
 		}
 		want := []staff.Person{}
@@ -45,4 +45,9 @@ func TestReadData(t *testing.T) {
 			t.Errorf("got %v want %v", newgot, want)
 		}
 	})
+
+
+	func (t staff.Person) String() string {
+		return fmt.Sprintf("{%v %v }", t.Id, t.FirstName)
+	}
 }
