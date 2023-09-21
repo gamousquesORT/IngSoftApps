@@ -11,6 +11,7 @@
 *.vscode
 *.mp4
 *.csv
+*.xlsx
 
 # Test binary, built with `go test -c`
 *.test
