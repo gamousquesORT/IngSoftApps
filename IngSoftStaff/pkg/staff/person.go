@@ -1,7 +1,9 @@
 package staff
 
-import "time"
-
+import (
+	"fmt"
+	"time"
+)
 
 const (
 	Student  = 1
@@ -24,16 +26,19 @@ type Person struct {
 	CellPhone     string `csv:"Celular"`
 	Graduation    string `csv:"Graduado"`
 	Degree        string `csv:"Graduado"`
+}
 
+func (t Person) String() string {
+	return fmt.Sprintf("{%v %v }", t.Id, t.FirstName)
 }
 
 type Course struct {
-	Id string
-	Name     string
+	Id   string
+	Name string
 }
 
 type Session struct {
-	Id   string
+	Id          string
 	Name        string
 	StartDate   time.Time
 	Instructors []Person
