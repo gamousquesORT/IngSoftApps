@@ -25,7 +25,8 @@ type Person struct {
 	PersonalEmail string `csv:"Email_Personal"`
 	CellPhone     string `csv:"Celular"`
 	Graduation    string `csv:"Graduado"`
-	Degree        string `csv:"Graduado"`
+	Degree        string `csv:"Grado"`
+	
 }
 
 func (t Person) String() string {

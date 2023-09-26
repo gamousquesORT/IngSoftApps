@@ -35,8 +35,9 @@ func TestReadData(t *testing.T) {
 	
 
 		options := ReadOptions{
-			filename: "../../../data/profesIngSoft.csv",
-			delimiter: ';',
+			//CASA filename: "../../../data/profesIngSoft.csv",
+			filename: "../../data/profesIngSoft.csv",
+			delimiter: ',',
 		}
 
 		

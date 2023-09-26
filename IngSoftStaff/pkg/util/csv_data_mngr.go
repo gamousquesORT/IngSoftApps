@@ -75,7 +75,7 @@ func ReadCSVHeader(fileName string) (rune, error) {
         return 0, err
     }
 
-	var r rune
+	var r rune = csvReader.Comma
 	var ok bool
 
 	if len(header) == 1 {
