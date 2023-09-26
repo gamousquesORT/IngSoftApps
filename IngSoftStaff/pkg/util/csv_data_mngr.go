@@ -55,6 +55,7 @@ func ReadData(opt ReadOptions,staffList []staff.Person) ([]*staff.Person, error)
 
 }
 
+
 func ReadCSVHeader(fileName string) (rune, error) {
 	file, err := os.Open(fileName)
     if err != nil {
@@ -88,7 +89,6 @@ func ReadCSVHeader(fileName string) (rune, error) {
 	return r, nil
 
 }
-
 
 
 func FindSeparator(s string) (rune, bool) {

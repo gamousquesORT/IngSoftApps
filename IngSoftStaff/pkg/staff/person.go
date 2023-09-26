@@ -17,8 +17,28 @@ const (
 	Onboarding = 3
 )
 
+type DateTime struct {
+	time.Time
+}
+
+// Convert the internal date as CSV string
+func (date *DateTime) MarshalCSV() (string, error) {
+	return date.String(), nil
+}
+
+// You could also use the standard Stringer interface
+func (date DateTime) String() string {
+	return date.Time.Format("01022006")
+}
+
+// Convert the CSV string as internal date
+func (date *DateTime) UnmarshalCSV(csv string) (err error) {
+	date.Time, err = time.Parse("01022006", csv)
+	return err
+}
+
 type Person struct {
-	Id            string `csv:"Persona"`
+	ID            string `csv:"Persona"`
 	FirstName     string `csv:"Nombre"`
 	Surname       string `csv:"Apellido"`
 	WorkEmail     string `csv:"Email_ORT"`
@@ -26,11 +46,11 @@ type Person struct {
 	CellPhone     string `csv:"Celular"`
 	Graduation    string `csv:"Graduado"`
 	Degree        string `csv:"Grado"`
-	
+	LastPromotion string `csv:"FechaPromocion"`
 }
 
 func (t Person) String() string {
-	return fmt.Sprintf("{%v %v }", t.Id, t.FirstName)
+	return fmt.Sprintf("{%v %v }", t.ID, t.FirstName)
 }
 
 type Course struct {
@@ -47,7 +67,7 @@ type Session struct {
 
 func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, graduation, degree string, activeSince time.Time, status int) Person {
 	return Person{
-		Id:            id,
+		ID:            id,
 		FirstName:     firstName,
 		Surname:       surname,
 		WorkEmail:     workEmail,
