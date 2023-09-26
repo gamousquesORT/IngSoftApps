@@ -1,9 +1,11 @@
 package staff
 
 import (
-	"fmt"
+
 	"time"
+	//"IngSoftStaff/pkg/util"
 )
+
 
 const (
 	Student  = 1
@@ -17,41 +19,20 @@ const (
 	Onboarding = 3
 )
 
-type DateTime struct {
-	time.Time
+type PersonData struct {
+	ID            string
+	FirstName     string
+	Surname       string
+	WorkEmail     string
+	PersonalEmail string
+	CellPhone     string
+	Graduation    string
+	Degree        string
+	LastPromotion string
+	ActiveSince   string
 }
 
-// Convert the internal date as CSV string
-func (date *DateTime) MarshalCSV() (string, error) {
-	return date.String(), nil
-}
 
-// You could also use the standard Stringer interface
-func (date DateTime) String() string {
-	return date.Time.Format("01022006")
-}
-
-// Convert the CSV string as internal date
-func (date *DateTime) UnmarshalCSV(csv string) (err error) {
-	date.Time, err = time.Parse("01022006", csv)
-	return err
-}
-
-type Person struct {
-	ID            string `csv:"Persona"`
-	FirstName     string `csv:"Nombre"`
-	Surname       string `csv:"Apellido"`
-	WorkEmail     string `csv:"Email_ORT"`
-	PersonalEmail string `csv:"Email_Personal"`
-	CellPhone     string `csv:"Celular"`
-	Graduation    string `csv:"Graduado"`
-	Degree        string `csv:"Grado"`
-	LastPromotion string `csv:"FechaPromocion"`
-}
-
-func (t Person) String() string {
-	return fmt.Sprintf("{%v %v }", t.ID, t.FirstName)
-}
 
 type Course struct {
 	Id   string
@@ -62,11 +43,11 @@ type Session struct {
 	Id          string
 	Name        string
 	StartDate   time.Time
-	Instructors []Person
+	Instructors []PersonData
 }
 
-func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, graduation, degree string, activeSince time.Time, status int) Person {
-	return Person{
+func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, graduation, degree string, lastPrometed time.Time, activeSince time.Time, status int) PersonData {
+	return PersonData{
 		ID:            id,
 		FirstName:     firstName,
 		Surname:       surname,
@@ -75,5 +56,10 @@ func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, grad
 		CellPhone:     cellPhone,
 		Graduation:    graduation,
 		Degree:        degree,
+		LastPromotion: lastPrometed.String(),
+		ActiveSince:   activeSince.String(),
 	}
 }
+
+
+

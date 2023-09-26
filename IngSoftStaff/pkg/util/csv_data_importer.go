@@ -1,15 +1,13 @@
-
 package util
 
 import (
-	"IngSoftStaff/pkg/staff"
-	"os"
 	"encoding/csv"
-	"github.com/gocarina/gocsv"
 	"io"
-	 "regexp"
-)
+	"os"
+	"regexp"
 
+	"github.com/gocarina/gocsv"
+)
 
 //https://articles.wesionary.team/easy-working-with-csv-in-golang-using-gocsv-package-9c8424728bbe
 
@@ -23,7 +21,8 @@ type ReadOptions struct {
 	delimiter rune
 }
 
-func ReadData(opt ReadOptions,staffList []staff.Person) ([]*staff.Person, error) {
+
+func ReadData(opt ReadOptions) ([]PersonCSV, error) {
 
 	 delimiter, err := ReadCSVHeader(opt.filename);
 	 if err != nil {
@@ -45,7 +44,7 @@ func ReadData(opt ReadOptions,staffList []staff.Person) ([]*staff.Person, error)
 	defer staffFile.Close()
 
 
-	staff := []*staff.Person{}
+	staff := []PersonCSV{}
 	
 	if err := gocsv.UnmarshalFile(staffFile, &staff); err != nil { // Load clients from file
 		return nil, err
