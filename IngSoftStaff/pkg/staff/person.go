@@ -1,8 +1,6 @@
 package staff
 
 import (
-
-	"time"
 	//"IngSoftStaff/pkg/util"
 )
 
@@ -32,34 +30,12 @@ type PersonData struct {
 	ActiveSince   string
 }
 
-
-
-type Course struct {
-	Id   string
-	Name string
+type PersonRepository interface {
+	ImportData() (*[]PersonData, error)
 }
 
-type Session struct {
-	Id          string
-	Name        string
-	StartDate   time.Time
-	Instructors []PersonData
-}
 
-func NewPerson(id, firstName, surname, workEmail, personalEmail, cellPhone, graduation, degree string, lastPrometed time.Time, activeSince time.Time, status int) PersonData {
-	return PersonData{
-		ID:            id,
-		FirstName:     firstName,
-		Surname:       surname,
-		WorkEmail:     workEmail,
-		PersonalEmail: personalEmail,
-		CellPhone:     cellPhone,
-		Graduation:    graduation,
-		Degree:        degree,
-		LastPromotion: lastPrometed.String(),
-		ActiveSince:   activeSince.String(),
-	}
-}
+
 
 
 

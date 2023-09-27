@@ -1,62 +1,30 @@
-package util
+package staff
 
 import (
 	//"fmt"
 	//"reflect"
+	staff "IngSoftStaff/pkg/staff/stafflogic"
 	"testing"
 )
-
-func checkCSV(newgot []PersonCSV, want []PersonCSV) bool {
-	var cnt int = 0
-
-	for i := range newgot {
-		if newgot[i].ID != want[i].ID {
-			cnt++
-		}
-		if newgot[i].FirstName != want[i].FirstName {
-			cnt++
-		}
-		if newgot[i].Surname != want[i].Surname {
-			cnt++
-		}
-
-		if newgot[i].WorkEmail != want[i].WorkEmail {
-			cnt++
-		}
-
-		if newgot[i].PersonalEmail != want[i].PersonalEmail {
-			cnt++
-		}
-
-		if newgot[i].CellPhone != want[i].CellPhone {
-			cnt++
-		}
-
-		if newgot[i].Graduation != want[i].Graduation {
-			cnt++
-		}
-
-		if newgot[i].Degree != want[i].Degree {
-			cnt++
-		}
-
-		if newgot[i].LastPromotion != want[i].LastPromotion {
-			cnt++
-		}
-
-	}
-	return cnt == 0
-}
 
 func TestReadData(t *testing.T) {
 
 	t.Run("given_a_Non_Existent_file_returns_an_Error", func(t *testing.T) {
 
-		options := ReadOptions{
-			filename:  "../../data/profesIngSoft11.csv",
-			delimiter: ';',
+
+		rep := PersonCSVRepository { 
+			staff: []PersonCSV{},
+			options: ReadOptions{
+				filename:  "../../data/profesIngSoft11.csv",
+				delimiter: ',',
+			},
 		}
-		_, err := ReadData(options)
+
+		personsService := staff.NewPersonService()
+		
+		got, err := personsService.ReadPersons()
+
+	
 		if err == nil {
 			t.Fatalf("Got not nil %v", err.Error())
 		}
