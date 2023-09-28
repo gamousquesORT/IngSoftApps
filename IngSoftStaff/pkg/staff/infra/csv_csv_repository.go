@@ -17,12 +17,6 @@ type NotUsed struct {
 	Name string
 }
 
-
-type ReadOptions struct {
-	filename string
-	delimiter rune
-}
-
 type DateTime struct {
 	time.Time
 }
@@ -43,6 +37,12 @@ func (date *DateTime) UnmarshalCSV(csv string) (err error) {
 	return err
 }
 
+
+type ReadOptions struct {
+	filename string
+	delimiter rune
+}
+
 type PersonCSV struct {
 	ID            string `csv:"Persona"`
 	FirstName     string `csv:"Nombre"`
@@ -54,8 +54,6 @@ type PersonCSV struct {
 	Degree        string `csv:"Grado"`
 	LastPromotion string `csv:"FechaPromocion"`
 }
-
-
 
 type PersonCSVRepository struct {
 	Options ReadOptions
@@ -86,12 +84,12 @@ func NewPersonCSVRepository(filename string) domain.PersonRepository {
 
 func (repo PersonCSVRepository) ImportData() (*[]domain.PersonData, error) {
 
-	 delimiter, err := readCSVHeader(repo.Options.filename);
+	 delimiter, err := readCSVDelimiter(repo.Options.filename, repo.Options.delimiter);
 	 if err != nil {
 		return nil, err
 	}
 
-	// set the pipe as the delimiter for reading
+	//override default csv reader delimiter
 	gocsv.SetCSVReader(func(in io.Reader) gocsv.CSVReader {
 		r := csv.NewReader(in)
 		r.Comma = delimiter
@@ -99,7 +97,6 @@ func (repo PersonCSVRepository) ImportData() (*[]domain.PersonData, error) {
 	})
 
 	staffFile, err := os.Open(repo.Options.filename)
-
 	if err != nil {
 		return nil, err
 	}
@@ -111,28 +108,25 @@ func (repo PersonCSVRepository) ImportData() (*[]domain.PersonData, error) {
 		return nil, err
 	}
 
-	personsData := []domain.PersonData{}
-
+	personsInDomainDataFormat := []domain.PersonData{}
 	for _, p := range personsInCSVFormat {
-		personsData = append(personsData, *p.ToPerson())
+		personsInDomainDataFormat = append(personsInDomainDataFormat, *p.ToPerson())
 	}
 
-	return &personsData, nil
+	return &personsInDomainDataFormat, nil
 
 }
 
 
-func readCSVHeader(fileName string) (rune, error) {
+func readCSVDelimiter(fileName string, delimiter rune) (rune, error) {
 	file, err := os.Open(fileName)
     if err != nil {
         return 0, err
     }
-
-    // remember to close the file at the end of the program
     defer file.Close()
 
 	csvReader := csv.NewReader(file)
-	csvReader.Comma = ','
+	csvReader.Comma = delimiter
 	csvReader.FieldsPerRecord = -1
 
 	// read csv header
@@ -145,23 +139,26 @@ func readCSVHeader(fileName string) (rune, error) {
 	var r rune = csvReader.Comma
 	var ok bool
 
-	if len(header) == 1 {
-		r, ok = findSeparator(header[0])
-		if !ok {
-			return 0, nil
-		}
+	r, ok = findSeparator(header)
+	if !ok {
+		return 0, nil
 	}
-
+	
 	return r, nil
 
 }
 
 
-func findSeparator(s string) (rune, bool) {
-    re := regexp.MustCompile(`[;,]`)
-    match := re.FindString(s)
-    if match == "" {
-        return 0, false
-    }
+func findSeparator(s []string) (rune, bool) {
+
+	var match string = ","
+
+	if len(s) == 1 {
+		re := regexp.MustCompile(`[;,]`)
+    	match = re.FindString(s[0])
+		if match == "" {
+			return 0, false
+		} 
+	}
     return rune(match[0]), true
 }

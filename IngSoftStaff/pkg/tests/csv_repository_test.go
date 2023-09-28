@@ -9,7 +9,7 @@ import (
 	"IngSoftStaff/pkg/staff/infra"
 )
 
-func checkCSV(newgot *[]domain.PersonData, want []domain.PersonData) bool {
+func checkPersonTestDataSets(newgot *[]domain.PersonData, want []domain.PersonData) bool {
 	var cnt int = 0	
 
 	for i := range *newgot {
@@ -63,7 +63,6 @@ func TestReadData(t *testing.T) {
 	})
 
 	t.Run("given_a_wellformed_file_returns_a_PersonList", func(t *testing.T) {
-
 		p1 := domain.PersonData{ID: "1234", FirstName: "Gastón", Surname: "Mousques", WorkEmail: "mousques@academy.edu.uy", PersonalEmail: "mousques@example.com", CellPhone: "634323", Graduation: "SI", Degree: "", LastPromotion: "23/09/2023"}
 		p2 := domain.PersonData{ID: "14", FirstName: "Ignacio", Surname: "Valla", WorkEmail: "ignacio.valla@academy.edu.uy", PersonalEmail: "ignacio.valla@example.com", CellPhone: "694870", Graduation: "SI", Degree: "", LastPromotion: "23/09/2023"}
 		p3 := domain.PersonData{ID: "9526", FirstName: "Martin", Surname: "Sol", WorkEmail: "solar_m@academy.edu.uy", PersonalEmail: "", CellPhone: "2312255", Graduation: "SI", Degree: "", LastPromotion: "23/09/2023"}
@@ -91,7 +90,7 @@ func TestReadData(t *testing.T) {
 			t.Errorf("Got not nil %v", err)
 		}
 
-		if !checkCSV(got, want) {
+		if !checkPersonTestDataSets(got, want) {
 			t.Errorf("got %v want %v", got, want)
 		}
 
