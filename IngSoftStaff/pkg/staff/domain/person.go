@@ -1,4 +1,4 @@
-package staff
+package domain
 
 import (
 	//"IngSoftStaff/pkg/util"

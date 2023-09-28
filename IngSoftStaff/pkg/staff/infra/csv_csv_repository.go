@@ -1,12 +1,13 @@
-package staff
+package infra
 
 import (
-	"IngSoftStaff/pkg/staff"
+	"IngSoftStaff/pkg/staff/domain"
 	"encoding/csv"
 	"io"
 	"os"
 	"regexp"
 	"time"
+
 	"github.com/gocarina/gocsv"
 )
 
@@ -57,12 +58,12 @@ type PersonCSV struct {
 
 
 type PersonCSVRepository struct {
-	staff []PersonCSV
-	options ReadOptions
+	Options ReadOptions
+	Filename string
 }
 
-func (p PersonCSV) ToPerson() *staff.PersonData {
-	return &staff.PersonData{
+func (p PersonCSV) ToPerson() *domain.PersonData {
+	return &domain.PersonData{
 		ID: p.ID,
 		FirstName: p.FirstName,
 		Surname: p.Surname,
@@ -74,21 +75,18 @@ func (p PersonCSV) ToPerson() *staff.PersonData {
 	}
 
 }
-var _ staff.PersonRepository = &PersonCSVRepository{}
+var _ domain.PersonRepository = &PersonCSVRepository{}
 
-func NewPersonCSVRepository(filename string) staff.PersonRepository {
+func NewPersonCSVRepository(filename string) domain.PersonRepository {
 	return &PersonCSVRepository{
-		staff: []PersonCSV{},
-		options: ReadOptions{
-			filename: filename,
-			delimiter: ';',
-		},
+		Options:  ReadOptions{filename: filename, delimiter: ','},
+		Filename: filename,
 	}
 }
 
-func (repo PersonCSVRepository) ImportData() (*[]staff.PersonData, error) {
+func (repo PersonCSVRepository) ImportData() (*[]domain.PersonData, error) {
 
-	 delimiter, err := ReadCSVHeader(repo.options.filename);
+	 delimiter, err := readCSVHeader(repo.Options.filename);
 	 if err != nil {
 		return nil, err
 	}
@@ -100,30 +98,31 @@ func (repo PersonCSVRepository) ImportData() (*[]staff.PersonData, error) {
 		return r
 	})
 
-	staffFile, err := os.Open(repo.options.filename)
+	staffFile, err := os.Open(repo.Options.filename)
 
 	if err != nil {
 		return nil, err
 	}
 	defer staffFile.Close()
 
+	personsInCSVFormat := []PersonCSV{}
 
-	if err := gocsv.UnmarshalFile(staffFile, &repo.staff); err != nil { // Load clients from file
+	if err := gocsv.UnmarshalFile(staffFile, &personsInCSVFormat); err != nil { // Load clients from file
 		return nil, err
 	}
 
-	persons := []staff.PersonData{}
+	personsData := []domain.PersonData{}
 
-	for _, p := range repo.staff {
-		persons = append(persons, *p.ToPerson())
+	for _, p := range personsInCSVFormat {
+		personsData = append(personsData, *p.ToPerson())
 	}
 
-	return &persons, nil
+	return &personsData, nil
 
 }
 
 
-func ReadCSVHeader(fileName string) (rune, error) {
+func readCSVHeader(fileName string) (rune, error) {
 	file, err := os.Open(fileName)
     if err != nil {
         return 0, err
@@ -147,7 +146,7 @@ func ReadCSVHeader(fileName string) (rune, error) {
 	var ok bool
 
 	if len(header) == 1 {
-		r, ok = FindSeparator(header[0])
+		r, ok = findSeparator(header[0])
 		if !ok {
 			return 0, nil
 		}
@@ -158,7 +157,7 @@ func ReadCSVHeader(fileName string) (rune, error) {
 }
 
 
-func FindSeparator(s string) (rune, bool) {
+func findSeparator(s string) (rune, bool) {
     re := regexp.MustCompile(`[;,]`)
     match := re.FindString(s)
     if match == "" {

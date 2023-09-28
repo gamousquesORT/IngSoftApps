@@ -1,5 +1,6 @@
-package staff
+package domain
 import ("time")
+
 
 type Course struct {
 	Id   string
