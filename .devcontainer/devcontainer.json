@@ -24,7 +24,7 @@
 	// "customizations": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8080, 5432], 
+	"forwardPorts": [8080, 5432, 8000], 
 	"mounts": ["source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
