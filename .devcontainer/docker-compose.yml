@@ -29,7 +29,8 @@ services:
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    env_file: .env
+    env_file: 
+      - .env
       # Ensure that the variables in .env match the same variables in devcontainer.json
       
 

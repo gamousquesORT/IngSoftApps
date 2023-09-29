@@ -17,6 +17,7 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/using-ss
 
 ### Postfresql on devcontainer ###
 https://blog.pamelafox.org/2022/11/running-postgresql-in-devcontainer-with.html
+https://www.youtube.com/watch?v=vEtR5qsXfZE&t=116s
 
 https://gorm.io/docs/connecting_to_the_database.html
 https://gorm.io/docs/index.html
@@ -25,3 +26,8 @@ https://gorm.io/docs/index.html
 https://dev.to/karanpratapsingh/connecting-to-postgresql-using-gorm-24fj
 
 https://github.com/jackc/pgx
+
+https://medium.com/@itskenzylimon/getting-started-on-golang-gorm-af49381caf3f
+
+
+https://copyprogramming.com/howto/postgresql-and-docker-which-directory-is-needed-to-persist-data

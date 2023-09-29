@@ -18,7 +18,7 @@ const (
 )
 
 type PersonData struct {
-	ID            string
+	ID            uint32
 	FirstName     string
 	Surname       string
 	WorkEmail     string
