@@ -34,5 +34,7 @@ https://copyprogramming.com/howto/postgresql-and-docker-which-directory-is-neede
 
 
 Admin Tools
+(*) https://dbeaver.io/download/
+
 https://tableplus.com
-https://www.heidisql.com
+

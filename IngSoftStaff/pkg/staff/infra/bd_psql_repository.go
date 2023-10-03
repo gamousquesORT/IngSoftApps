@@ -7,7 +7,6 @@ import (
 )
 
   type PersonGORM struct {
-	gorm.Model
 	ID            uint32
 	FirstName     string
 	Surname       string
@@ -21,15 +20,17 @@ import (
 }
 
 func OpenDB() {
-	db, err := gorm.Open(postgres.Open("host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=localtime"))
+	dbUrl := "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=localtime"
+	db, err := gorm.Open(postgres.Open(dbUrl),&gorm.Config{})
+
 	if err != nil {
 		panic("failed to connect database")
 	  }
 
-	  db.Migrator().DropTable(&PersonGORM{})
+	  //db.Migrator().DropTable(&PersonGORM{})
 	  
 	  // Migrate the schema
-	  db.AutoMigrate(&PersonGORM{})
+	  //db.AutoMigrate(&PersonGORM{})
 
 
 	  p1 := domain.PersonData{ID: 1234, FirstName: "Gastón", Surname: "Mousques", WorkEmail: "mousques@academy.edu.uy", PersonalEmail: "mousques@example.com", CellPhone: "634323", Graduation: "SI", Degree: "", LastPromotion: "23/09/2023"}
@@ -39,16 +40,3 @@ func OpenDB() {
 
 
 
-func Init() *gorm.DB {
-    dbURL := "postgres://postgres:postgres@localhost:5432/postgres"
-
-    db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-
-    if err != nil {
-        log.Fatalln(err)
-    }
-
-    db.AutoMigrate(&models.Book{})
-
-    return db
-}
