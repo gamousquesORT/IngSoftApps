@@ -39,7 +39,9 @@
 				"GitHub.copilot-chat",
 				"GitHub.remotehub",
 				"DavidAnson.vscode-markdownlint",
-				"bierner.markdown-mermaid"
+				"bierner.markdown-mermaid",
+				"mtxr.sqltools",
+				"ckolkman.vscode-postgres"
 			]
 		}
 	}

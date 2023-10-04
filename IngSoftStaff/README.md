@@ -32,6 +32,10 @@ https://medium.com/@itskenzylimon/getting-started-on-golang-gorm-af49381caf3f
 
 https://copyprogramming.com/howto/postgresql-and-docker-which-directory-is-needed-to-persist-data
 
+### postgres data ###
+https://stackoverflow.com/questions/55092413/postgresql-docker-container-not-writing-data-to-disk
+https://stackoverflow.com/questions/29600369/starting-and-populating-a-postgres-container-in-docker
+https://stackoverflow.com/questions/27377876/docker-postgres-with-initial-data-is-not-persisted-over-commits
 
 Admin Tools
 (*) https://dbeaver.io/download/
