@@ -41,7 +41,8 @@
 				"DavidAnson.vscode-markdownlint",
 				"bierner.markdown-mermaid",
 				"mtxr.sqltools",
-				"ckolkman.vscode-postgres"
+				"ckolkman.vscode-postgres",
+				"ms-ossdata.vscode-postgresql"
 			]
 		}
 	}
