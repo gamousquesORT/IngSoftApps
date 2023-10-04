@@ -25,7 +25,24 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [8080, 5432, 8000], 
-	"mounts": ["source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"]
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"msyrus.go-doc",
+				"premparihar.gotestexplorer",
+				"766b.go-outliner",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"GitHub.remotehub",
+				"DavidAnson.vscode-markdownlint",
+				"bierner.markdown-mermaid"
+			]
+		}
+	}
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "go version",
