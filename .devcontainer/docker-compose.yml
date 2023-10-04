@@ -34,10 +34,10 @@ services:
       # Ensure that the variables in .env match the same variables in devcontainer.json
       
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOSTNAME: localhost
+      - POSTGRES_USER: postgres
+      - POSTGRES_DB: postgres
+      - POSTGRES_PASSWORD: postgres
+      - POSTGRES_HOSTNAME: localhost
 
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
