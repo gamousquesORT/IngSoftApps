@@ -19,9 +19,11 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/using-ss
 https://blog.pamelafox.org/2022/11/running-postgresql-in-devcontainer-with.html
 https://www.youtube.com/watch?v=vEtR5qsXfZE&t=116s
 
+### GORM ###
 https://gorm.io/docs/connecting_to_the_database.html
 https://gorm.io/docs/index.html
 
+https://earthly.dev/blog/using-gorm-go/
 
 https://dev.to/karanpratapsingh/connecting-to-postgresql-using-gorm-24fj
 
@@ -42,3 +44,6 @@ Admin Tools
 
 https://tableplus.com
 
+### WSL setup ###
+https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/
+https://www.smashingmagazine.com/2019/09/moving-javascript-development-bash-windows/

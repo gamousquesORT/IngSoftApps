@@ -5,8 +5,11 @@ import (
 )
 
 func main() {
-	infra.OpenDB()
+	db:= infra.InitDB()
 
+	infra.InsertPerson(db)
+	
+	
 }
 
 
