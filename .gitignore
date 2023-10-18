@@ -28,5 +28,6 @@ arraySlices/.vscode/launch.json
 
 data/
 IngSoftStaff/db
+*.db  
 
 #*.env
