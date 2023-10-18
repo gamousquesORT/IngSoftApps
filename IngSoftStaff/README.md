@@ -47,3 +47,7 @@ https://tableplus.com
 ### WSL setup ###
 https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/
 https://www.smashingmagazine.com/2019/09/moving-javascript-development-bash-windows/
+
+### ssh ###
+https://medium.com/trabe/use-your-local-ssh-keys-inside-a-docker-container-ea1d117515dc
+https://code.visualstudio.com/docs/remote/troubleshooting
