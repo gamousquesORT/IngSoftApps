@@ -50,4 +50,4 @@ https://www.smashingmagazine.com/2019/09/moving-javascript-development-bash-wind
 
 ### ssh ###
 https://medium.com/trabe/use-your-local-ssh-keys-inside-a-docker-container-ea1d117515dc
-https://code.visualstudio.com/docs/remote/troubleshooting
+https://code.visualstudio.com/docs/remote/troubleshootinSQL 
