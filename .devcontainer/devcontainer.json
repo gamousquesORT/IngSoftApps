@@ -33,7 +33,6 @@
 			"extensions": [
 				"golang.go",
 				"msyrus.go-doc",
-				"premparihar.gotestexplorer",
 				"766b.go-outliner",
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
