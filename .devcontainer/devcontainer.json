@@ -14,9 +14,7 @@
 		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {},
 		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
 		"ghcr.io/devcontainers/features/sshd:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers-contrib/features/npm-package:1": {},
-		"ghcr.io/devcontainers/features/node:1": {"version": "latest"}
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 
     // Features to add to the dev container. More info: https://containers.dev/features.
@@ -40,11 +38,7 @@
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
 				"GitHub.remotehub",
-				"DavidAnson.vscode-markdownlint",
-				"bierner.markdown-mermaid",
-				"mtxr.sqltools",
-				"ckolkman.vscode-postgres",
-				"ms-ossdata.vscode-postgresql"
+				"DavidAnson.vscode-markdownlint"
 			]
 		}
 	}
