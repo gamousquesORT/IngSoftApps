@@ -4,7 +4,8 @@ import (
 //	"IngSoftStaff/pkg/staff/domain"
 	"fmt"
 	//"gorm.io/driver/sqlite" // Sqlite driver based on CGO
-	"gorm.io/driver/postgres"
+	//"gorm.io/driver/postgres"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -24,9 +25,9 @@ import (
 }
 
 func InitDB() *gorm.DB {
-	dbUrl := "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=localtime"
-	db, err := gorm.Open(postgres.Open(dbUrl),&gorm.Config{})
-	//db, err := gorm.Open(sqlite.Open("../../../data/staff.db"), &gorm.Config{})
+	//dbUrl := "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=localtime"
+	//db, err := gorm.Open(postgres.Open(dbUrl),&gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("../../../data/staff.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	  }
@@ -38,7 +39,7 @@ func InitDB() *gorm.DB {
 	  	  }
 		  
 		 // Migrate the schema
-	  //db.AutoMigrate(&PersonG{})
+	  db.AutoMigrate(&PersonG{})
 	  if err != nil {
 		panic("failed to perform migrations: " + err.Error())
 	}
