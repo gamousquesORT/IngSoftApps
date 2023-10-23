@@ -25,3 +25,9 @@
 # Go workspace file
 go.work
 arraySlices/.vscode/launch.json
+/IngSoftStaff/data/sqlite/sqlite3.def
+
+**/*.db
+**/*.def
+**/xlsx
+**/*csv
