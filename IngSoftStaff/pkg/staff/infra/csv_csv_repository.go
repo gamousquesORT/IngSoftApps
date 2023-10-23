@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"strconv"
 	"time"
 
 	"github.com/gocarina/gocsv"
@@ -61,8 +62,13 @@ type PersonCSVRepository struct {
 }
 
 func (p PersonCSV) ToPerson() *domain.PersonData {
+	num, err := strconv.ParseUint(p.ID, 10, 32)
+	if err != nil {
+        num = 999999
+    }
+	
 	return &domain.PersonData{
-		ID: p.ID,
+		ID:  uint32(num),
 		FirstName: p.FirstName,
 		Surname: p.Surname,
 		WorkEmail: p.WorkEmail,
@@ -71,6 +77,7 @@ func (p PersonCSV) ToPerson() *domain.PersonData {
 		Graduation: p.Graduation,
 		Degree: p.Degree,
 	}
+
 
 }
 var _ domain.PersonRepository = &PersonCSVRepository{}
