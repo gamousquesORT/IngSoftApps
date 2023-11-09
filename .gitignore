@@ -30,4 +30,4 @@ data/
 IngSoftStaff/db
 *.db  
 
-#*.env
+*.env
