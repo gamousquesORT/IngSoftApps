@@ -31,3 +31,8 @@ arraySlices/.vscode/launch.json
 **/*.def
 **/xlsx
 **/*csv
+data/
+IngSoftStaff/db
+*.db  
+
+*.env
